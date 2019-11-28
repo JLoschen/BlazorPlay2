@@ -1,12 +1,169 @@
 ﻿@page "/people"
+@using BlazorApp.Shared
 @inject HttpClient Http
+
 
 <h3>People</h3>
 
-<p>
-    This is Josh's test page with People on it!
-</p>
+@*<p>
+        This is Josh's test page with People on it!
+    </p>*@
+
+@*@if (isLoading == true)
+    {
+        <p>Stuff is Loading</p>
+        <button class="btn btn-info" @onclick="@SetToFalse">Stop Loading</button>
+    }
+    else
+    {
+        <p>Not Loading</p>
+        <button class="btn btn-info" @onclick="@SetToTrue">Start Loading</button>
+        <button class="btn btn-info" @onclick="@LoadPeople">Load People</button>
+    }*@
+
+@if (people == null)
+{
+    if (isLoading == true)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        @*<button class="btn btn-info" @onclick="@LoadPeople">Load People</button>*@
+        <button class="btn btn-info" @onclick="@(async () => await LoadPeople())">@message</button>
+    }
+}
+else
+{
+    <p><em>Error :(</em></p>
+    @*<div class="row">*@
+        @*@foreach (var person in people)
+            {
+                <button >Person</button>*@
+        @*<div class="col-lg-6 col-md-12 mb-2">
+            <form>
+                <div class="card border-primary rounded-0">
+                    <div class="card-header p-0">
+                        <div class="bg-info text-white text-center py-2">
+                            <h3>
+                                <i class="fa fa-envelope"></i> Contact Info
+                            </h3>
+                            <p class="m-0">
+                                The contact information for @person.FullName
+                            </p>
+                        </div>
+                    </div>*@
+        @*<div class="card-body p-3">
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user text-info"></i>
+                        </div>
+                        <input type="text" placeholder="First Name" @bind="@person.FirstName" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user text-info"></i>
+                        </div>
+                        <input type="text" placeholder="Last Name" @bind="@person.LastName" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-dollar-sign text-info"></i>
+                        </div>
+                        <input type="text" readonly @bind="@person.AccountBalance" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                @if (person.AccountBalance > 100)
+                                {
+                                    <i class="far fa-smile" style="color: green;"></i>
+                                }
+                                else if (person.AccountBalance > 0)
+                                {
+                                    <i class="far fa-frown" style="color: orange;"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-dizzy" style="color: red;"></i>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        @*<div class="text-center">
+                <button type="button" class="btn btn-info rounded-0 py-2 px-4 mr-2"
+                        @onclick="@(() => BuyNow(person))">
+                    Buy Now
+                </button>
+                <button type="button" class="btn btn-danger rounded-0 py-2 px-4"
+                        @onclick="@(() => SaveUser(person))">
+                    Save
+                </button>
+            </div>*@
+        @*</div>*@
+        @*</div>
+                </form>
+            </div>*@
+    }
+@*</div>*@
+
 
 @code {
+    List<PersonModel> people;
+    bool isLoading = false;
+    string message = "Load";
 
+    public void SetToFalse()
+    {
+        isLoading = false;
+    }
+
+    public void SetToTrue()
+    {
+        isLoading = true;
+    }
+
+    //private void BuyNow(PersonModel person)
+    //{
+    //    person.AccountBalance -= 5.15M;
+    //}
+
+    //private async Task SaveUser(PersonModel person)
+    //{
+    //    await Http.PostJsonAsync("person", person);
+    //}
+
+    //public async Task LoadPeople()
+    //{
+    //    isLoading = true;
+    //    await Task.Delay(2000);
+    //    people = await Http.GetJsonAsync<List<PersonModel>>(@"person\all");
+    //    isLoading = false;
+    //}
+
+    public async Task LoadPeople()
+    {
+        isLoading = true;
+        await Task.Delay(1000);
+        try
+        {
+            people = await Http.GetJsonAsync<List<PersonModel>>(@"person/all");
+        }
+        catch (Exception e)
+        {
+            message = e.Message + "inner-----" + e.InnerException.Message;
+        }
+
+        isLoading = false;
+    }
 }
