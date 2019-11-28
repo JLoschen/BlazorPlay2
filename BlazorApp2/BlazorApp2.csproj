@@ -6,6 +6,40 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\favicon\android-icon-144x144.png" />
+    <None Include="wwwroot\favicon\android-icon-192x192.png" />
+    <None Include="wwwroot\favicon\android-icon-36x36.png" />
+    <None Include="wwwroot\favicon\android-icon-48x48.png" />
+    <None Include="wwwroot\favicon\android-icon-72x72.png" />
+    <None Include="wwwroot\favicon\android-icon-96x96.png" />
+    <None Include="wwwroot\favicon\apple-icon-114x114.png" />
+    <None Include="wwwroot\favicon\apple-icon-120x120.png" />
+    <None Include="wwwroot\favicon\apple-icon-144x144.png" />
+    <None Include="wwwroot\favicon\apple-icon-152x152.png" />
+    <None Include="wwwroot\favicon\apple-icon-180x180.png" />
+    <None Include="wwwroot\favicon\apple-icon-57x57.png" />
+    <None Include="wwwroot\favicon\apple-icon-60x60.png" />
+    <None Include="wwwroot\favicon\apple-icon-72x72.png" />
+    <None Include="wwwroot\favicon\apple-icon-76x76.png" />
+    <None Include="wwwroot\favicon\apple-icon-precomposed.png" />
+    <None Include="wwwroot\favicon\apple-icon.png" />
+    <None Include="wwwroot\favicon\browserconfig.xml" />
+    <None Include="wwwroot\favicon\favicon-16x16.png" />
+    <None Include="wwwroot\favicon\favicon-32x32.png" />
+    <None Include="wwwroot\favicon\favicon-96x96.png" />
+    <None Include="wwwroot\favicon\favicon.ico" />
+    <None Include="wwwroot\favicon\ms-icon-144x144.png" />
+    <None Include="wwwroot\favicon\ms-icon-150x150.png" />
+    <None Include="wwwroot\favicon\ms-icon-310x310.png" />
+    <None Include="wwwroot\favicon\ms-icon-70x70.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.1.0-preview3.19555.2" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.1.0-preview3.19555.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.1.0-preview3.19555.2" />
